@@ -4,13 +4,12 @@
 
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {HeroesComponent} from './heroes.component';
-import {DashboardComponent} from './dashboard.component';
+import {HeroesComponent} from './components/heroes.component';
+import {DashboardComponent} from './components/dashboard.component';
 import {HeroService} from './hero.service';
 import {RouteRegistry, AsyncRoute, Router} from "angular2/router";
 
 import {View} from "angular2/core";
-import {componentProxyFactory} from "./component.proxy";
 
 declare var System:any;
 
@@ -20,20 +19,22 @@ declare var System:any;
     providers: [HeroService]
 })
 @RouteConfig([
+    //{path: '/', redirectTo: ['Dashboard']},
     {path: '/', name: 'Dashboard', component: DashboardComponent, useAsDefault:true},
-    {path: '/heroes', name: 'Heroes', component: HeroesComponent},
+    {path: '/heroes', name: 'Heroes', loader: () => System.import('/app/components/heroes.component').then(m=>m.HeroesComponent)},
     new  AsyncRoute({
         path: '/detail/:id',
         name: 'HeroDetail',
-        loader: () => System.import('/app/hero-detail.component').then(m => m.HeroDetailComponent)
+        loader: () => System.import('/app/components/hero-detail.component').then(m => m.HeroDetailComponent)
     })
 ])
 @View({
     templateUrl: 'app/app.component.html',
     styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
-
 })
+
+
 export class AppComponent {
     public title = 'Tour of Heroes';
 }
