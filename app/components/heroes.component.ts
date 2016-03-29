@@ -1,14 +1,14 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {HeroService} from '../hero.service';
+import {HeroService} from '../service/hero.service';
 //import {HeroDetailComponent} from './hero-detail.component';
 import {Hero} from '../hero';
 import {ROUTER_DIRECTIVES} from "angular2/router";
 
 @Component({
     selector: 'my-heroes',
-    templateUrl: 'app/components/heroes.component.html',
-    styleUrls: ['app/components/heroes.component.css'],
+    templateUrl: './app/components/heroes.component.html',
+    styleUrls: ['./app/components/heroes.component.css'],
     directives: [ROUTER_DIRECTIVES]
 })
 export class HeroesComponent implements OnInit {
@@ -33,6 +33,10 @@ export class HeroesComponent implements OnInit {
 
     goBack(){
         history.back();
+    }
+
+    goToTabTest(){
+        this._router.navigate(['TabsShow']);
     }
 }
 
