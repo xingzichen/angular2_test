@@ -1,8 +1,13 @@
 <ul class="nav nav-tabs">
-    <li [class.active]=true>
-        <a href="#">Test1 tab title</a>
-    </li>
-    <li [class.active]=false>
-        <a href="#">Test2 tab title</a>
+    <!--<li [class.active]=true>-->
+        <!--<a href="#">Test1 tab title</a>-->
+    <!--</li>-->
+    <!--<li [class.active]=false>-->
+        <!--<a href="#">Test2 tab title</a>-->
+    <!--</li>-->
+    <li *ngFor="#tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
+        <a >{{tab.title}}</a>
     </li>
 </ul>
+<!--<ng-content></ng-content>-->
+{{activeContent}}
